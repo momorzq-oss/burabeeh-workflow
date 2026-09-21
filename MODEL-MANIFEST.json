@@ -1,0 +1,47 @@
+[
+  {
+    "path": "diffusion_models/minimax_h3_hybrid_fl2va_ref2va_b25-49-int8.safetensors",
+    "bytes": 20970379632,
+    "sha256": "a629cfea8d89a071b140c6e1935dc9a23e72de6badc18975a2bb9e6d1423d76d",
+    "hash_status": "previously verified installation hash; not rehashed during recording"
+  },
+  {
+    "path": "loras/lightx2v_hybrid-4to8step-Turbo_r48_b25_curve_compatible.safetensors",
+    "bytes": 639833144,
+    "sha256": "95748546fd707fa813eb2a70acde32e1fc9daef0898f7c3160dc086e21521db5",
+    "hash_status": "previously verified installation hash; not rehashed during recording"
+  },
+  {
+    "path": "text_encoders/MiniMax/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+    "bytes": 15687142551,
+    "sha256": null,
+    "hash_status": "not measured in this backup",
+    "publisher_url": "https://huggingface.co/Comfy-Org/MiniMax-H3/blob/7e75982b97cd5a41d2dcfa1904ee88d0686d6fd1/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+    "publisher_sha256": "35a88d51044231fe332301d7a62aa81e3f2cba62febeb446e2c1e3e0ef76f2c6",
+    "publisher_size_matches": true
+  },
+  {
+    "path": "vae/Minimax/minimax_h3_video_vae_fp16.safetensors",
+    "bytes": 5207808496,
+    "sha256": null,
+    "hash_status": "not measured in this backup",
+    "publisher_url": "https://huggingface.co/Comfy-Org/MiniMax-H3/blob/7e75982b97cd5a41d2dcfa1904ee88d0686d6fd1/vae/minimax_h3_video_vae_fp16.safetensors",
+    "publisher_sha256": "7c1f131492e7eddacaac9069a61b81bdd39de5cc96561e677c5eab1cdce5e522",
+    "publisher_size_matches": true
+  },
+  {
+    "path": "vae/Minimax/minimax_h3_audio_vae_fp32.safetensors",
+    "bytes": 605254808,
+    "sha256": null,
+    "hash_status": "not measured in this backup",
+    "publisher_url": "https://huggingface.co/Comfy-Org/MiniMax-H3/blob/7e75982b97cd5a41d2dcfa1904ee88d0686d6fd1/vae/minimax_h3_audio_vae_fp32.safetensors",
+    "publisher_sha256": "8e505d95dd1561d47abd43d4238fd40d9bb1ae9e147ed0a4cba778d76ae4db48",
+    "publisher_size_matches": true
+  },
+  {
+    "path": "latent_upscale_models/minimax_h3_latent_upscaler_3d_bf16.safetensors",
+    "bytes": 690592992,
+    "sha256": null,
+    "hash_status": "not measured in this backup"
+  }
+]

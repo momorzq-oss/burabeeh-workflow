@@ -1,0 +1,8 @@
+{
+  "torch": "2.14.0+cu130",
+  "triton-windows": "3.8.0.post28",
+  "safetensors": "0.8.0",
+  "comfyui-frontend-package": "1.51.9",
+  "numpy": "2.4.6",
+  "av": "18.1.0"
+}

@@ -1,0 +1,485 @@
+{
+  "1": {
+    "inputs": {
+      "unet_name": "minimax_h3_hybrid_fl2va_ref2va_b25-49-int8.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "Hybrid b25-49 \u2014 tutorial base"
+    }
+  },
+  "2": {
+    "inputs": {
+      "attention": "comfy kitchen attention",
+      "model": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "ModelAttentionBackend",
+    "_meta": {
+      "title": "Attention backend"
+    }
+  },
+  "6": {
+    "inputs": {
+      "lora_name": "lightx2v_hybrid-4to8step-Turbo_r48_b25_curve_compatible.safetensors",
+      "strength_model": 0.7,
+      "model": [
+        "2",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "Hybrid Turbo \u2014 locally curve-adapted \u2014 0.70"
+    }
+  },
+  "7": {
+    "inputs": {
+      "clip_name": "MiniMax\\qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "type": "minimax",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "H3 text encoder"
+    }
+  },
+  "8": {
+    "inputs": {
+      "vae_name": "Minimax\\minimax_h3_video_vae_fp16.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Video VAE \u2014 installed FP16"
+    }
+  },
+  "9": {
+    "inputs": {
+      "vae_name": "Minimax\\minimax_h3_audio_vae_fp32.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Audio VAE"
+    }
+  },
+  "10": {
+    "inputs": {
+      "value": "integrated_multimodal_description: Single continuous six-second hand-painted 2D anime shot. Picture 1 establishes Sherlock/Mohammed, his exact face, swept dark hair, short beard, brown waistcoat, white shirt, dark tie, red armchair and study. Match this composition closely: window and brass lamp on screen left, bookcase screen right. No hat or coat. Sherlock remains seated, looking toward Watson offscreen right. He says calmly in warm British English, \"Watson. Your coat.\" His lips move only during this line. He then makes one small decisive nod and holds his attentive gaze. Restrained natural blinking and breathing. Static eye-level close-up, fine clean outlines, softly painted detail, warm afternoon light. Only Sherlock is visible. No entrance, train, location change, captions or text.\noverall_soundscape: Sherlock says exactly \"Watson. Your coat.\" Soft study room tone, distant London street ambience, subtle clothing rustle. No other speech and no music."
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "1. EDIT YOUR PROMPT"
+    }
+  },
+  "11": {
+    "inputs": {
+      "value": 864
+    },
+    "class_type": "PrimitiveInt",
+    "_meta": {
+      "title": "Preview width"
+    }
+  },
+  "12": {
+    "inputs": {
+      "value": 480
+    },
+    "class_type": "PrimitiveInt",
+    "_meta": {
+      "title": "Preview height"
+    }
+  },
+  "13": {
+    "inputs": {
+      "value": 158
+    },
+    "class_type": "PrimitiveInt",
+    "_meta": {
+      "title": "158 frames \u2014 6.58 seconds at 24 fps"
+    }
+  },
+  "14": {
+    "inputs": {
+      "value": 1376
+    },
+    "class_type": "PrimitiveInt",
+    "_meta": {
+      "title": "Final width \u2014 change with final height"
+    }
+  },
+  "15": {
+    "inputs": {
+      "value": 768
+    },
+    "class_type": "PrimitiveInt",
+    "_meta": {
+      "title": "Final height"
+    }
+  },
+  "20": {
+    "inputs": {
+      "prompt": [
+        "10",
+        0
+      ],
+      "width": [
+        "11",
+        0
+      ],
+      "height": [
+        "12",
+        0
+      ],
+      "length": [
+        "13",
+        0
+      ],
+      "ref_image_size": "match",
+      "clip": [
+        "7",
+        0
+      ],
+      "vae": [
+        "8",
+        0
+      ],
+      "audio_vae": [
+        "9",
+        0
+      ],
+      "ref_images.ref_image_0": [
+        "100",
+        0
+      ]
+    },
+    "class_type": "MiniMaxH3ReferenceToVideo",
+    "_meta": {
+      "title": "Reference-guided H3 \u2014 Episode 1 image CONNECTED"
+    }
+  },
+  "21": {
+    "inputs": {
+      "noise_seed": 202609210001
+    },
+    "class_type": "RandomNoise",
+    "_meta": {
+      "title": "KEEP FIXED after choosing a preview"
+    }
+  },
+  "22": {
+    "inputs": {
+      "model": [
+        "6",
+        0
+      ],
+      "conditioning": [
+        "20",
+        0
+      ]
+    },
+    "class_type": "BasicGuider",
+    "_meta": {
+      "title": "Preview guidance"
+    }
+  },
+  "23": {
+    "inputs": {
+      "sampler_name": "res_multistep"
+    },
+    "class_type": "KSamplerSelect",
+    "_meta": {
+      "title": "Sampler \u2014 tutorial res_multistep"
+    }
+  },
+  "24": {
+    "inputs": {
+      "scheduler": "simple",
+      "steps": 8,
+      "denoise": 1.0,
+      "model": [
+        "6",
+        0
+      ]
+    },
+    "class_type": "BasicScheduler",
+    "_meta": {
+      "title": "8-step preview / full denoise"
+    }
+  },
+  "25": {
+    "inputs": {
+      "noise": [
+        "21",
+        0
+      ],
+      "guider": [
+        "22",
+        0
+      ],
+      "sampler": [
+        "23",
+        0
+      ],
+      "sigmas": [
+        "24",
+        0
+      ],
+      "latent_image": [
+        "20",
+        1
+      ]
+    },
+    "class_type": "SamplerCustomAdvanced",
+    "_meta": {
+      "title": "3. GENERATE PREVIEW"
+    }
+  },
+  "26": {
+    "inputs": {
+      "av_latent": [
+        "25",
+        0
+      ]
+    },
+    "class_type": "LTXVSeparateAVLatent",
+    "_meta": {
+      "title": "Separate picture and sound"
+    }
+  },
+  "27": {
+    "inputs": {
+      "tile_size": 512,
+      "overlap": 64,
+      "temporal_size": 32,
+      "temporal_overlap": 8,
+      "samples": [
+        "26",
+        0
+      ],
+      "vae": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "VAEDecodeTiled",
+    "_meta": {
+      "title": "Preview picture \u2014 tiled decode"
+    }
+  },
+  "28": {
+    "inputs": {
+      "samples": [
+        "26",
+        1
+      ],
+      "vae": [
+        "9",
+        0
+      ]
+    },
+    "class_type": "VAEDecodeAudio",
+    "_meta": {
+      "title": "Preview sound \u2014 reused for final output"
+    }
+  },
+  "29": {
+    "inputs": {
+      "fps": 24.0,
+      "bit_depth": "auto",
+      "color_space": "sRGB",
+      "images": [
+        "27",
+        0
+      ],
+      "audio": [
+        "28",
+        0
+      ]
+    },
+    "class_type": "CreateVideo",
+    "_meta": {
+      "title": "Preview with original audio"
+    }
+  },
+  "30": {
+    "inputs": {
+      "filename_prefix": "Burabeeh-workflow/preview",
+      "format": "auto",
+      "format.codec": "auto",
+      "codec": "auto",
+      "video": [
+        "29",
+        0
+      ]
+    },
+    "class_type": "SaveVideo",
+    "_meta": {
+      "title": "PREVIEW \u2014 review motion + sound first"
+    }
+  },
+  "40": {
+    "inputs": {
+      "model_name": "minimax_h3_latent_upscaler_3d_bf16.safetensors",
+      "mode": "target dimensions",
+      "mode.width": [
+        "14",
+        0
+      ],
+      "mode.height": [
+        "15",
+        0
+      ],
+      "align": 32,
+      "enable_temporal_chunking": true,
+      "force_unload": true,
+      "device": "cuda",
+      "precision": "bf16",
+      "latent": [
+        "26",
+        0
+      ]
+    },
+    "class_type": "MinimaxH3LatentUpscaler3D",
+    "_meta": {
+      "title": "4. Upscale VIDEO latent only"
+    }
+  },
+  "41": {
+    "inputs": {
+      "video_latent": [
+        "40",
+        0
+      ],
+      "audio_latent": [
+        "26",
+        1
+      ]
+    },
+    "class_type": "LTXVConcatAVLatent",
+    "_meta": {
+      "title": "Rejoin untouched audio latent"
+    }
+  },
+  "42": {
+    "inputs": {
+      "model": [
+        "6",
+        0
+      ],
+      "conditioning": [
+        "20",
+        0
+      ]
+    },
+    "class_type": "BasicGuider",
+    "_meta": {
+      "title": "Refinement guidance \u2014 same prompt/references"
+    }
+  },
+  "43": {
+    "inputs": {
+      "scheduler": "simple",
+      "steps": 4,
+      "denoise": 0.25,
+      "model": [
+        "6",
+        0
+      ]
+    },
+    "class_type": "BasicScheduler",
+    "_meta": {
+      "title": "4-step refinement / denoise 0.25"
+    }
+  },
+  "44": {
+    "inputs": {
+      "noise": [
+        "21",
+        0
+      ],
+      "guider": [
+        "42",
+        0
+      ],
+      "sampler": [
+        "23",
+        0
+      ],
+      "sigmas": [
+        "43",
+        0
+      ],
+      "latent_image": [
+        "41",
+        0
+      ]
+    },
+    "class_type": "SamplerCustomAdvanced",
+    "_meta": {
+      "title": "5. REFINE THE SELECTED PREVIEW"
+    }
+  },
+  "45": {
+    "inputs": {
+      "av_latent": [
+        "44",
+        0
+      ]
+    },
+    "class_type": "LTXVSeparateAVLatent",
+    "_meta": {
+      "title": "Refined video latent"
+    }
+  },
+  "46": {
+    "inputs": {
+      "tile_size": 512,
+      "overlap": 64,
+      "temporal_size": 32,
+      "temporal_overlap": 8,
+      "samples": [
+        "45",
+        0
+      ],
+      "vae": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "VAEDecodeTiled",
+    "_meta": {
+      "title": "Final picture \u2014 tiled decode"
+    }
+  },
+  "47": {
+    "inputs": {
+      "fps": 24,
+      "bit_depth": "auto",
+      "color_space": "sRGB",
+      "images": [
+        "46",
+        0
+      ],
+      "audio": [
+        "28",
+        0
+      ]
+    },
+    "class_type": "CreateVideo",
+    "_meta": {
+      "title": "Final picture + stage-one audio"
+    }
+  },
+  "100": {
+    "inputs": {
+      "image": "ep01_end_frame.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "ENABLED \u2014 Sherlock identity + Episode 1 end frame"
+    }
+  }
+}

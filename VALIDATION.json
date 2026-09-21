@@ -1,0 +1,22 @@
+{
+  "preview": {
+    "frames": 158,
+    "fps": 24.0,
+    "width": 864,
+    "height": 480,
+    "sha256": "a26b93026a84514054ffa87cd65cff3fb8fea97d840035b7d78f6f631047e17a",
+    "audio_samples": 210944
+  },
+  "refined": {
+    "frames": 158,
+    "fps": 24.0,
+    "width": 1376,
+    "height": 768,
+    "sha256": "57cd2e9c0e6bc1b1b0aec06e0acf5cf37ac22bcc9824bd7fe40cd9d088f94879",
+    "audio_samples": 210944
+  },
+  "audio_pcm_identical": true,
+  "preview_seconds_measured": 404.72,
+  "refinement_seconds_measured": 270.88,
+  "review_scope": "Full decode; sampled visual checks. Fresh preview and refinement executed successfully. Listening quality not independently approved."
+}
