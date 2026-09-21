@@ -13,6 +13,7 @@ The video uses real ComfyUI captures, zoom transitions, readable held close-ups 
 ## Contents
 
 - [Setup and model files](#setup-and-model-files)
+- [Model download links](#model-download-links)
 - [Quick start](#quick-start)
 - [Tested settings](#tested-settings)
 - [How the two stages work](#how-the-two-stages-work)
@@ -44,6 +45,26 @@ This configuration was tested on Windows with an NVIDIA RTX 3090 (24 GB). Use a 
 **Turbo compatibility matters:** the compatible file is a local conversion. Renaming the original upstream adapter does not perform that conversion. The unadapted adapter caused a shape mismatch with this base. Follow the reproduction instructions in [MODEL-NOTES.md](MODEL-NOTES.md). Model weights are not included in this repository.
 
 A locally tested MiniMax H3 workflow for a fast preview followed by latent refinement, with the original preview audio reused in the final video. This is the owner’s selected working configuration, not a benchmark proving it is the best workflow for every machine or subject.
+
+## Model download links
+
+These links select the exact upstream variants used by this configuration. Save each file in the folder shown above. Links are pinned to specific publisher revisions.
+
+| Model | Node | Links |
+|---|---|---|
+| Hybrid INT8 base | 1 | [Download](https://huggingface.co/smhfacct/Minimax-H3-fl2va-ref2va-hybrid-models/resolve/a36feb17fbd1f20ff4bdd509ccd07e2b7b585a38/minimax_h3_hybrid_fl2va_ref2va_b25-49-int8.safetensors?download=true) · [File page](https://huggingface.co/smhfacct/Minimax-H3-fl2va-ref2va-hybrid-models/blob/a36feb17fbd1f20ff4bdd509ccd07e2b7b585a38/minimax_h3_hybrid_fl2va_ref2va_b25-49-int8.safetensors) |
+| Turbo source adapter — convert before use | 6 | [Download](https://huggingface.co/TenStrip/MinimaxH3-Turbo_Shenanigans/resolve/7b0cb70261a47dfb7b660999a0545163f20a8d14/lightx2v_hybrid-4to8step-Turbo_r48.safetensors?download=true) · [File page](https://huggingface.co/TenStrip/MinimaxH3-Turbo_Shenanigans/blob/7b0cb70261a47dfb7b660999a0545163f20a8d14/lightx2v_hybrid-4to8step-Turbo_r48.safetensors) |
+| Qwen text encoder | 7 | [Download](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/7e75982b97cd5a41d2dcfa1904ee88d0686d6fd1/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors?download=true) · [File page](https://huggingface.co/Comfy-Org/MiniMax-H3/blob/7e75982b97cd5a41d2dcfa1904ee88d0686d6fd1/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors) |
+| Video VAE FP16 | 8 | [Download](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/7e75982b97cd5a41d2dcfa1904ee88d0686d6fd1/vae/minimax_h3_video_vae_fp16.safetensors?download=true) · [File page](https://huggingface.co/Comfy-Org/MiniMax-H3/blob/7e75982b97cd5a41d2dcfa1904ee88d0686d6fd1/vae/minimax_h3_video_vae_fp16.safetensors) |
+| Audio VAE FP32 | 9 | [Download](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/7e75982b97cd5a41d2dcfa1904ee88d0686d6fd1/vae/minimax_h3_audio_vae_fp32.safetensors?download=true) · [File page](https://huggingface.co/Comfy-Org/MiniMax-H3/blob/7e75982b97cd5a41d2dcfa1904ee88d0686d6fd1/vae/minimax_h3_audio_vae_fp32.safetensors) |
+| Latent upscaler BF16 | 40 | [Download](https://huggingface.co/LBH-123-AI/Minimax_h3_latent_Upscaler/resolve/3f941d5d182014dd5c0a5e16330420ee2d4aa0c6/minimax_h3_latent_upscaler_3d_conv_v1/minimax_h3_latent_upscaler_3d_conv_v1_bf16.safetensors?download=true) · [File page](https://huggingface.co/LBH-123-AI/Minimax_h3_latent_Upscaler/blob/3f941d5d182014dd5c0a5e16330420ee2d4aa0c6/minimax_h3_latent_upscaler_3d_conv_v1/minimax_h3_latent_upscaler_3d_conv_v1_bf16.safetensors) |
+
+**Turbo adapter (node 6):** download the source adapter above, then follow the [conversion instructions](MODEL-NOTES.md#critical-turbo-compatibility-caveat) using [adapt_turbo.py](adapt_turbo.py) and the [pinned conversion helper](https://github.com/Jalen-Brunson/ComfyUI-MiniMax-H3-PDD-Acc/tree/311a65dd53832d8a5f8177a9d5fb923c09e35a90). The workflow requires the resulting `lightx2v_hybrid-4to8step-Turbo_r48_b25_curve_compatible.safetensors`; it has no direct upstream download. Merely renaming the source adapter will not work.
+
+**Upscaler (node 40):** the publisher calls this file `minimax_h3_latent_upscaler_3d_conv_v1_bf16.safetensors`. Save it as `minimax_h3_latent_upscaler_3d_bf16.safetensors` in `models/latent_upscale_models/` to match this workflow. Its SHA-256 matches the installed file: `4f57821f5837f32f7142b67d815606dbd7550f194e5c769f7d6c3f83b146a5e6`. This is a filename change only, unlike the Turbo conversion.
+
+**Optional nodes 3–5 are bypassed:** their placeholder adapters are not used and are not required downloads. The six entries above cover all model weights used by the active workflow.
+
 
 ## Quick start
 
